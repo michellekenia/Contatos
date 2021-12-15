@@ -1,6 +1,6 @@
 package br.com.zup.Contato.contatos.dtos;
 
-import br.com.zup.Contato.produto.ProdutoDTO;
+import br.com.zup.Contato.produto.dtos.ProdutoDTO;
 
 import java.util.List;
 
