@@ -17,4 +17,13 @@ public class ContatoService {
 
     }
 
+    public ContatoDTO buscarContato(String email) {
+
+        for (ContatoDTO contatoVerificado : contatos) {
+            if (contatoVerificado.getEmail().equalsIgnoreCase(email)){
+                return contatoVerificado;
+            }
+        }
+    }
+
 }
