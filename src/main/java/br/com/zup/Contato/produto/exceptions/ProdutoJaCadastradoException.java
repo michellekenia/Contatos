@@ -1,4 +1,4 @@
 package br.com.zup.Contato.contatos.exceptions;
 
-public class ContatoProdutoJaCadastradoException {
+public class ProdutoJaCadastradoException {
 }
