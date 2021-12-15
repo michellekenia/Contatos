@@ -1,6 +1,7 @@
 package br.com.zup.Contato.contatos;
 
 import br.com.zup.Contato.contatos.dtos.ContatoDTO;
+import br.com.zup.Contato.contatos.exceptions.ContatoNaoEncontradoException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,13 +18,14 @@ public class ContatoService {
 
     }
 
-    public ContatoDTO buscarContato(String email) {
+    public ContatoDTO buscarContatoNaLista(String email) {
 
         for (ContatoDTO contatoVerificado : contatos) {
             if (contatoVerificado.getEmail().equalsIgnoreCase(email)) ;
             return contatoVerificado;
-
         }
+
+       throw new ContatoNaoEncontradoException("Esse contato não exite");
 
     }
 
