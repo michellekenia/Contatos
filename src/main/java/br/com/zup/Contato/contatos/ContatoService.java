@@ -56,6 +56,14 @@ public class ContatoService {
 
     }
 
+    public ContatoDTO atualizarListaDeContatos(String email, ContatoDTO contatoRecebido) {
+        ContatoDTO atualizarContato = buscarContatoNaLista(email);
+        atualizarContato.setEmail(contatoRecebido.getEmail());
+        atualizarContato.setNome(contatoRecebido.getNome());
+        atualizarContato.setTelefone(contatoRecebido.getTelefone());
+        return atualizarContato;
+    }
+
     public void atualizarListaDeProdutos(String email, ContatoDTO contatoDTO) {
 
         ContatoDTO buscarContato = buscarContatoNaLista(email);
