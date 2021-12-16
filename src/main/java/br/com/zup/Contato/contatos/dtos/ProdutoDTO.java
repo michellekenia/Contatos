@@ -1,4 +1,4 @@
-package br.com.zup.Contato.produto.dtos;
+package br.com.zup.Contato.contatos.dtos;
 
 public class ProdutoDTO {
 

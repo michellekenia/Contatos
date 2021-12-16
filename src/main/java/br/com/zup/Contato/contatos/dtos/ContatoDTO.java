@@ -1,7 +1,5 @@
 package br.com.zup.Contato.contatos.dtos;
 
-import br.com.zup.Contato.produto.dtos.ProdutoDTO;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
