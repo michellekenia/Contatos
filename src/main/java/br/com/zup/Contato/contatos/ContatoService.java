@@ -2,6 +2,7 @@ package br.com.zup.Contato.contatos;
 
 import br.com.zup.Contato.contatos.dtos.ContatoDTO;
 import br.com.zup.Contato.contatos.exceptions.ContatoNaoEncontradoException;
+import br.com.zup.Contato.contatos.exceptions.EmailJaCadastradoException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ public class ContatoService {
     private List<ContatoDTO> contatos = new ArrayList<>();
 
     public void cadastrarContato(ContatoDTO contato) {
-
         contatos.add(contato);
 
     }
@@ -25,8 +25,17 @@ public class ContatoService {
             return contatoVerificado;
         }
 
-       throw new ContatoNaoEncontradoException("Esse contato não exite");
+        throw new ContatoNaoEncontradoException("Esse contato não exite");
 
+    }
+
+    public void verificarContatoRepetido(String emailRepetido) {
+
+        for (ContatoDTO contatoRepetido : contatos) {
+            if (contatoRepetido.getEmail().equals(emailRepetido))
+
+                throw new EmailJaCadastradoException("Esse email já está cadastrado");
+        }
     }
 
 }
