@@ -3,11 +3,10 @@ package br.com.zup.Contato.config;
 public class MensagemDeErro {
 
     public String mensagem;
-    public String campo;
 
-    public MensagemDeErro(String mensagem, String campo) {
+
+    public MensagemDeErro(String message, String mensagem) {
         this.mensagem = mensagem;
-        this.campo = campo;
     }
 
     public String getMensagem() {
