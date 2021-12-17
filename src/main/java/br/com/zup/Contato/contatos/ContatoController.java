@@ -20,9 +20,14 @@ public class ContatoController {
         contatoService.cadastrarContato(contato);
     }
 
-    @GetMapping("/{e-mail}")
+    @GetMapping("/{email}")
     public ContatoDTO buscarContatoPeloEmail (@PathVariable String email) {
         return contatoService.buscarContatoNaLista(email);
+    }
+
+    @PutMapping("/{email}")
+    public ContatoDTO atualizarContato(@PathVariable String email, @RequestBody ContatoDTO contatoDTO) {
+        return contatoService.atualizarListaDeContatos(email, contatoDTO);
     }
 
 }
