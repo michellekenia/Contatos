@@ -42,7 +42,7 @@ public class ContatoService {
         for (ContatoDTO contatoRepetido : contatos) {
             if (contatoRepetido.getEmail().equals(emailRepetido))
 
-                throw new EmailJaCadastradoException("Esse email já está cadastrado");
+                throw new EmailJaCadastradoException("Esse email já foi cadastrado.");
         }
     }
 
@@ -50,7 +50,7 @@ public class ContatoService {
     public void verificarSeProdutoExiste(int id) {
         for (ProdutoDTO produtoVerificado : produtos) {
             if (produtoVerificado.getId() == id) {
-                throw new ProdutoJaCadastradoException("Esse produto já foi cadastrado");
+                throw new ProdutoJaCadastradoException("Esse produto já foi cadastrado.");
             }
         }
 
