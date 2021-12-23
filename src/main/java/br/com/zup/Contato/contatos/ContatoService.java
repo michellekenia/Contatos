@@ -14,26 +14,34 @@ import java.util.List;
 public class ContatoService {
 
     private List<ContatoDTO> contatos = new ArrayList<>();
-
-    public void cadastrarContato(ContatoDTO contato) {
-        contatos.add(contato);
-
-    }
-
     private List<ProdutoDTO> produtos = new ArrayList<>();
 
-    public void cadastrarProdutos(ProdutoDTO produto) {
-        produtos.add(produto);
+    public void cadastrarContato(ContatoDTO contatoCadastro, ProdutoDTO produtoCadastro) {
+
+        try {
+            verificarContatoRepetido(contatoCadastro.getEmail());
+        } catch (EmailJaCadastradoException exception) {
+            exception.getMessage();
+        }
+        try {
+            verificarSeProdutoExiste(produtoCadastro.getNomeDoProduto());
+        } catch (ProdutoJaCadastradoException exception) {
+            exception.getMessage();
+        }
+        contatos.add(contatoCadastro);
+
+
     }
 
-    public ContatoDTO buscarContatoNaLista(String email) {
+
+    public ContatoDTO buscarContatoNaLista(String emailBusca) {
 
         for (ContatoDTO contatoVerificado : contatos) {
-            if (contatoVerificado.getEmail().equalsIgnoreCase(email)) ;
+            if (contatoVerificado.getEmail().equalsIgnoreCase(emailBusca)) ;
             return contatoVerificado;
         }
 
-        throw new ContatoNaoEncontradoException("Esse contato não exite");
+        throw new ContatoNaoEncontradoException("Esse contato não existe.");
 
     }
 
@@ -47,30 +55,38 @@ public class ContatoService {
     }
 
 
-    public void verificarSeProdutoExiste(int id) {
+    public void verificarSeProdutoExiste(String produtoNaLista) {
+
+
         for (ProdutoDTO produtoVerificado : produtos) {
-            if (produtoVerificado.getId() == id) {
+            if (produtoVerificado.getNomeDoProduto().equals(produtoNaLista)) {
                 throw new ProdutoJaCadastradoException("Esse produto já foi cadastrado.");
             }
         }
 
     }
 
-    public ContatoDTO atualizarListaDeContatos(String email, ContatoDTO contatoRecebido) {
-        ContatoDTO atualizarContato = buscarContatoNaLista(email);
+    public ContatoDTO atualizarListaDeContatos(String emailRecebido, ContatoDTO contatoRecebido, ProdutoDTO produtoRecebido) {
+        ContatoDTO atualizarContato = buscarContatoNaLista(emailRecebido);
         atualizarContato.setEmail(contatoRecebido.getEmail());
         atualizarContato.setNome(contatoRecebido.getNome());
         atualizarContato.setTelefone(contatoRecebido.getTelefone());
+
+        atualizarListaDeProdutos(emailRecebido, contatoRecebido);
         return atualizarContato;
     }
 
-    public void atualizarListaDeProdutos(String email, ContatoDTO contatoDTO) {
-
+    public List<ProdutoDTO> atualizarListaDeProdutos(String email, ContatoDTO contatoDTO) {
         ContatoDTO buscarContato = buscarContatoNaLista(email);
         for (ProdutoDTO novoProduto : contatoDTO.getProdutos()) {
             buscarContato.getProdutos().add(novoProduto);
         }
 
+        return buscarContato.getProdutos();
+    }
+
+    public List<ContatoDTO> retornarTodosOsContatos () {
+        return contatos;
     }
 
 }
